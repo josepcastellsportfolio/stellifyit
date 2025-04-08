@@ -1,0 +1,51 @@
+/* Define CSS variables for light and dark themes */
+/* Define CSS variables for light and dark themes */
+:root {
+    --light-gradient-start: var(--dynamic-light-gradient-start);
+    --light-gradient-end: var(--dynamic-light-gradient-end);
+  }
+  
+  .dark-theme {
+    --dark-gradient-start: var(--dynamic-dark-gradient-start);
+    --dark-gradient-end: var(--dynamic-dark-gradient-end);
+  }
+  
+  
+  /* Light Theme Animation */
+  @keyframes lightThemeBackground {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%; /* Matches the starting position */
+    }
+  }
+  
+  /* Dark Theme Animation */
+  @keyframes darkThemeBackground {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%; /* Matches the starting position */
+    }
+  }
+  
+  /* Apply the animations */
+  .light-theme {
+    animation: lightThemeBackground 10s infinite linear;
+    background: linear-gradient(45deg, var(--light-gradient-start), var(--light-gradient-end));
+    background-size: 200% 200%;
+  }
+  
+  .dark-theme {
+    animation: darkThemeBackground 10s infinite linear;
+    background: linear-gradient(45deg, var(--dark-gradient-start), var(--dark-gradient-end));
+    background-size: 200% 200%;
+  }

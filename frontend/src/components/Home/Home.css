@@ -1,0 +1,84 @@
+.home-content {
+  background-color: var(--background-color); /* Use theme background color */
+}
+
+.divider {
+  height: 10px;
+  background-color: '#FFFFFF'; /* Matches the theme color */
+  margin: 0; /* No margins */
+  padding: 0; /* No padding */
+}
+
+.slider-image {
+  height: 600px; /* Example height for the slider images */
+}
+.slider-caption {
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.slider-caption h3 {
+  font-size: 2rem; /* Make the title bigger */
+  margin-bottom: 8px;
+}
+
+.slider-caption p {
+  font-size: 1.2rem; /* Make the description slightly bigger */
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.gallery-item {
+  flex: 1 1 calc(25% - 16px); /* 4 items per row with spacing */
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+}
+
+.gallery-item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+}
+
+.card {
+  flex: 1;
+  max-width: 300px;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.welcome-alert {
+  position: fixed; /* Make the alert float */
+  top: 16px; /* Distance from the top of the viewport */
+  left: 16px; /* Adjusted to move it more to the left */
+  transform: none; /* Remove centering */
+  z-index: 1000; /* Ensure it appears above other elements */
+  width: 90%; /* Optional: Adjust width for responsiveness */
+  max-width: 400px; /* Optional: Set a max width */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}

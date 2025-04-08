@@ -1,0 +1,29 @@
+/* Container styles */
+.about-me-container {
+    padding: 24px 30%;
+    margin: 0 auto;
+    height: 100%;
+  }
+  
+  /* Title styles */
+  .about-me-title {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  /* Card styles */
+  .about-me-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+  }
+  
+  /* Dark theme overrides */
+  .dark-theme .about-me-card {
+    background-color: var(--dark-gradient-start); /* Use the dark gradient start color */
+    color: #eff2ef;
+  }
+  
+  .dark-theme .about-me-container {
+    color: #eff2ef;
+  }

@@ -1,0 +1,24 @@
+.menu-container {
+    display: flex;
+    justify-content: space-between; /* Distribute sections evenly */
+    align-items: center;
+    width: 100%;
+  }
+  
+  .menu-left {
+    flex: 1; /* Left section takes up space on the left */
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .menu-center {
+    flex: 1; /* Center section takes up space in the middle */
+    display: flex;
+    justify-content: center;
+  }
+  
+  .menu-right {
+    flex: 1; /* Right section takes up space on the right */
+    display: flex;
+    justify-content: flex-end;
+  }

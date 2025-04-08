@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Typography, Alert, Form, Input, Button, Checkbox } from 'antd';
+import { Typography, Alert, Form, Input, Button, Checkbox} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import authService from '../../services/api';
-import '../../theme/theme.less';
+import './Login.css';
+
 
 const { Title } = Typography;
 
@@ -24,7 +25,6 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: { username: string; password: string; email?: string }) => {
     try {
       const { username, password, email } = values;
-      console.log('Request Payload:', { username, email, password }); // Log the request payload
       if (isRegistering) {
         if (email) {
           await authService.register({ username, email, password });
@@ -36,10 +36,15 @@ const Login: React.FC = () => {
       } else {
         await authService.login(username, password);
       }
-      navigate('/frontpage');
+      localStorage.setItem('username', username); // Save username to localStorage
+      navigate('/');
     } catch (err) {
       setError(isRegistering ? 'Registration failed' : 'Invalid credentials');
-      console.error('Error:', err.message);
+      if (err instanceof Error) {
+        console.error('Error:', err.message);
+      } else {
+        console.error('Unexpected error', err);
+      }
     }
   };
 
@@ -49,7 +54,8 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: '400px', height: '100%', margin: '0 auto', padding: '20px' }}>
+
+    <div className='mainDiv'>
       <Title level={2}>{isRegistering ? 'Register' : 'Login'}</Title>
       {error && <Alert message={error} type="error" showIcon />}
       <Form
@@ -77,14 +83,6 @@ const Login: React.FC = () => {
           rules={[{ required: true, message: 'Please input your Password!' }]}
         >
           <Input prefix={<LockOutlined />} type="password" placeholder="Password" />
-        </Form.Item>
-        <Form.Item>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-            <a href="">Forgot password</a>
-          </div>
         </Form.Item>
         <Form.Item>
           <Button block type="primary" htmlType="submit">

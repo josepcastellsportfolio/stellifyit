@@ -1,12 +1,11 @@
 import React from 'react';
 import { Layout } from 'antd';
-import '../../theme/theme.less';
-
 const { Footer: AntFooter } = Layout;
+import './Footer.css';
 
 const Footer: React.FC = () => {
   return (
-    <AntFooter className="footer">
+    <AntFooter className="footerlogin">
       <div className="container">
         <p>&copy; 2023 StellifyIt. All rights reserved.</p>
       </div>

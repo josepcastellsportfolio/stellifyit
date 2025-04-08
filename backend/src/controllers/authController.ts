@@ -21,7 +21,8 @@ const login = async (req: Request, res: Response): Promise<void> => {
 
     const token = jwt.sign(
       { username: user.name },
-      config.jwt.secret
+      config.jwt.secret,
+      { expiresIn: '1h' } 
     );
     res.json({ token });
   } catch (error) {
@@ -31,15 +32,9 @@ const login = async (req: Request, res: Response): Promise<void> => {
 };
 
 const register = async (req: Request, res: Response): Promise<void> => {
-  console.log('Register request body:', req.body); // Debug log
-  const { username, email, password } = req.body;  // Changed from name to username
-  
-  try {
-    if (!username || !email || !password) {
-      res.status(400).json({ message: 'Username, email and password are required' });
-      return;
-    }
+  const { username, email, password } = req.body;
 
+  try {
     const existingUser = await pool.query(
       'SELECT * FROM stellifyit.users WHERE name = $1 OR email = $2',
       [username, email]
@@ -54,10 +49,8 @@ const register = async (req: Request, res: Response): Promise<void> => {
     const passwordHash = await bcrypt.hash(password, saltRounds);
 
     const result = await pool.query(
-      `INSERT INTO stellifyit.users 
-       (name, email, password_hash, created_at) 
-       VALUES ($1, $2, $3, CURRENT_TIMESTAMP) 
-       RETURNING name, email`,
+      `INSERT INTO stellifyit.users (name, email, password_hash, created_at) 
+       VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING name, email`,
       [username, email, passwordHash]
     );
 
@@ -71,16 +64,4 @@ const register = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const logout = async (_req: Request, res: Response): Promise<void> => {
-  try {
-    res.status(200).json({ message: 'Logout successful' });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error during logout' });
-  }
-};
-
-export {
-  login,
-  register,
-  logout
-};
+export { login, register };

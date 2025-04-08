@@ -40,3 +40,24 @@
 .read-the-docs {
   color: #888;
 }
+
+
+div#root {
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+}
+html {
+  height: 100%;
+}
+.ant-btn-variant-outlined {
+  border-color: none;
+}
+.ant-btn-variant-outlined:hover {
+  border-color: none;
+}

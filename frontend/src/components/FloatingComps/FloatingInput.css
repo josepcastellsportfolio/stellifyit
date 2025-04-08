@@ -1,0 +1,117 @@
+.floating-input-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 1000;
+  border-radius: 25px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 25%;
+}
+
+.input-with-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+
+.floating-input {
+  width: 100%;
+  border-radius: 25px;
+}
+
+.floating-input-button {
+  width: 50px;
+  border: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  color: green;
+}
+
+.floating-input-button:hover {
+  color: darkgreen;
+}
+
+.selected-model-tag {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.response-container {
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 300px;
+  word-wrap: break-word;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Limit the height of the menu to 200px */
+.ant-dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Add styles for chat message structure and scrolling */
+.chat-container {
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.chat-message-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-message-container.user {
+  justify-content: flex-start;
+}
+
+.chat-message-container.assistant {
+  justify-content: flex-end;
+}
+
+.chat-avatar {
+  flex-shrink: 0;
+}
+
+.chat-message {
+  max-width: 70%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  word-wrap: break-word;
+}
+
+.chat-message.user-message {
+  background-color: unset;
+  text-align: left;
+}
+
+.chat-message.assistant-message {
+  background-color: unset;
+  
+  text-align: right;
+}
+
+/* Remove shadow from minimize-button */
+.minimize-button {
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+.minimize-button:hover {
+  box-shadow: none;
+}

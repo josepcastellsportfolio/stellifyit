@@ -39,13 +39,11 @@ const App: React.FC = () => {
               <Route
                 path="/"
                 element={
-                  <ProtectedRoute>
                     <Layout isDarkMode={isDarkMode}
                             setIsDarkMode={setIsDarkMode}
                             locale={locale}
                             setLocale={setLocale}
                             />
-                  </ProtectedRoute>
                 }
               >
                 <Route index element={<Home />} /> {/* Main page */}

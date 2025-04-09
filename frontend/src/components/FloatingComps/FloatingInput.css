@@ -11,6 +11,7 @@
   padding: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease; /* Smooth transition for width and height */
+  transform-origin: top left; /* Set the origin for the transition */
 }
 
 .floating-input-container.maximized {
@@ -26,6 +27,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  transform-origin: bottom right; /* Ensure the origin remains consistent */
 }
 
 

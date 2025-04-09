@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Menu, Button, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
-import { MoonOutlined, SunOutlined, MenuOutlined, GlobalOutlined } from '@ant-design/icons';
+import { MoonOutlined, SunOutlined, MenuOutlined, GlobalOutlined, UserOutlined } from '@ant-design/icons';
 import './Header.css';
 import { useIntl } from 'react-intl';
 
@@ -48,7 +48,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ isDarkMode, setIsDarkMode, onMenu
             <Button type="text" icon={<MenuOutlined />} onClick={onMenuToggle} />
           </Menu.Item>
           <Menu.Item key="1">
-            <Link to={`/frontpage`}>{intl.formatMessage({ id: 'header.home' })}</Link>
+            <Link to={`/`}>{intl.formatMessage({ id: 'header.home' })}</Link>
           </Menu.Item>
           <Menu.Item key="2">
             <Link to={`/about`}>{intl.formatMessage({ id: 'header.about' })}</Link>
@@ -60,7 +60,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ isDarkMode, setIsDarkMode, onMenu
         {/* Right Section */}
         <Menu mode="horizontal" className="menu-right">
           <Menu.Item key="5">
-            <Link to={`/user/:id`}>{intl.formatMessage({ id: 'header.profile' })}</Link>
+            <Link type="text" to={`/user/:id`}><UserOutlined /></Link>
           </Menu.Item>
           <Menu.Item key="6">
             <Button type="text" onClick={() => setIsDarkMode(!isDarkMode)}>

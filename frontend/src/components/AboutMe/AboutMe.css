@@ -27,3 +27,38 @@
   .dark-theme .about-me-container {
     color: #eff2ef;
   }
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .about-me-container {
+    padding: 24px 20%;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-me-container {
+    padding: 24px 10%;
+  }
+
+  .about-me-title {
+    font-size: 1.5rem;
+  }
+
+  .about-me-card {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-me-container {
+    padding: 16px 5%;
+  }
+
+  .about-me-title {
+    font-size: 1.2rem;
+  }
+
+  .about-me-card {
+    padding: 8px;
+  }
+}

@@ -3,5 +3,17 @@
     "header.about": "Quiénes somos",
     "header.whatWeDo": "Qué hacemos",
     "header.contact": "Contáctanos",
-    "header.profile": "Perfil"
-  }
+    "header.profile": "Perfil",
+    "floatingInput.placeholder": "Pregúntale a Stella cualquier duda",
+    "home.welcomeMessage": "¡Bienvenido, {username}! 🎉",
+    "home.defaultUser": "Usuario",
+    "home.slider.title1": "Soluciones digitales para tu negocio",
+    "home.slider.description1": "Mejora el rendimiento de tu negocio a través de la gestión online.",
+    "home.slider.title2": "Equipos de trabajo dedicados a tus necesidades",
+    "home.slider.description2": "Creamos plataformas dedicadas a tu modelo de negocio.",
+    "home.slider.title3": "Gestión de residuos y sostenibilidad",
+    "home.slider.description3": "Creamos herramientas para la gestión del medio ambiente y la sostenibilidad de tu empresa.",
+    "home.gallery.text1": "Accede al formulario para empezar a trabajar juntos",
+    "home.gallery.text2": "Infórmate de tus requisitos para ser sostenible",
+    "home.gallery.button": "Contáctanos"
+}

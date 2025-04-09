@@ -10,7 +10,91 @@
   border-radius: 25px;
   padding: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 25%;
+  transition: all 0.3s ease; /* Smooth transition for width and height */
+}
+
+.floating-input-container.maximized {
+  top: auto; /* Align to the bottom */
+  bottom: 0;
+  left: 0;
+  width: 18%; /* Default width for larger screens */
+  height: 60%; /* Default height for larger screens */
+  max-height: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Media query for mobile mode */
+/* Media query for mobile mode */
+@media (max-width: 480px) {
+  .floating-input-container.maximized {
+    width: 100%; /* Full width for mobile */
+    height: 50%; /* 90% height for mobile */
+    top: auto; /* Align to the bottom */
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    border-radius: 0; /* Remove border radius for full-screen effect */
+    box-shadow: none; /* Cleaner look for mobile */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .chat-container {
+    flex: 1; /* Allow chat messages to take up available space */
+    overflow-y: auto; /* Enable scrolling for chat messages */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    width: 100%; /* Full width for mobile */
+  }
+  .input-with-button {
+    display: flex;
+    flex-direction: column; /* Stack input and button vertically */
+    align-items: stretch; /* Stretch input and button to full width */
+    gap: 5px;
+    width: 100%;
+    margin-top: 10px; /* Add spacing above the input */
+  }
+
+  .selected-model-tag {
+    align-self: flex-start; /* Align the model label to the left */
+    margin-top: 5px; /* Add spacing below the input */
+  }
+
+  .chat-avatar-button {
+    font-size: 24px; /* Increase icon size for mobile */
+  }
+
+  .chat-avatar {
+    font-size: 24px; /* Increase avatar icon size for mobile */
+  }
+
+  .floating-input-button {
+    font-size: 20px; /* Increase input button icon size for mobile */
+  }
+
+  .minimize-button {
+    font-size: 20px; /* Increase minimize button icon size for mobile */
+  }
+
+  .chat-container .chat-avatar {
+    font-size: 28px; /* Increase avatar icon size in chat container for mobile */
+  }
+
+  .chat-container .chat-message {
+    font-size: 16px; /* Adjust message font size for better readability on mobile */
+  }
+
+  .chat-container .chat-avatar {
+    width: 40px; /* Increase avatar width for mobile */
+    height: 40px; /* Increase avatar height for mobile */
+    font-size: 24px; /* Adjust font size for better visibility */
+  }
 }
 
 .input-with-button {
@@ -30,7 +114,13 @@
   border: none;
   border-radius: 25px;
   transition: all 0.3s ease;
-  color: green;
+  background-color: transparent; /* Remove green background */
+  color: inherit; /* Use default text color */
+}
+
+.floating-input-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .floating-input-button:hover {
@@ -38,10 +128,24 @@
 }
 
 .selected-model-tag {
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 1em; /* Relative to the parent container's font size */
+  margin-top: 0.5em; /* Relative to the parent container's font size */
 }
 
+/* Responsive styles for .selected-model-tag */
+@media (max-width: 768px) {
+  .selected-model-tag {
+    font-size: 0.9em; /* Slightly smaller for medium screens */
+    margin-top: 0.4em;
+  }
+}
+
+@media (max-width: 480px) {
+  .selected-model-tag {
+    font-size: 0.8em; /* Smaller for small screens */
+    margin-top: 0.3em;
+  }
+}
 .response-container {
   padding: 10px;
   border-radius: 5px;

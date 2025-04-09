@@ -1,56 +1,69 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Alert, Card, Button, Layout, Carousel } from 'antd';
+import { useIntl } from 'react-intl';
 import './Home.css';
 import FloatingInput from '../FloatingComps/FloatingInput';
+import AuthContext, { AuthProvider, useAuth } from '../Auth/AuthContext';
 
 const { Content } = Layout;
 
 const Home: React.FC = () => {
-  const [username, setUsername] = useState<string | null>(null);
-  const [showAlert, setShowAlert] = useState<boolean>(true);
+  const intl = useIntl();
+  const authContext = useContext(AuthContext); // Access authentication state from AuthContext
+  const isAuthenticated = authContext?.isAuthenticated ?? false; // Handle undefined context
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const sliderImages = [
     {
-      url: '/assets/images/building1.jpg',
-      title: 'Soluciones digitales para tu negocio',
-      description: 'Mejora el rendimiento de tu negocio a traves de la gestion online.',
+      url: '/assets/images/wall.jpg',
+      title: intl.formatMessage({ id: 'home.slider.title1', defaultMessage: 'Digital solutions for your business' }),
+      description: intl.formatMessage({
+        id: 'home.slider.description1',
+        defaultMessage: 'Improve your business performance through online management.',
+      }),
     },
     {
       url: '/assets/images/building2.jpg',
-      title: 'Equipos de trabajo dedicados a tus necesidades',
-      description: 'Creamos plataformas dedicadas a tu modelo de negocio.',
+      title: intl.formatMessage({ id: 'home.slider.title2', defaultMessage: 'Dedicated teams for your needs' }),
+      description: intl.formatMessage({
+        id: 'home.slider.description2',
+        defaultMessage: 'We create platforms tailored to your business model.',
+      }),
     },
     {
       url: '/assets/images/penguin-9475470_1280.jpg',
-      title: 'Gestion de residuos y sostenibilidad',
-      description: 'Creamos herramientas para la gestion del medio ambiente y para la sostenibilidad de tu empresa.',
+      title: intl.formatMessage({ id: 'home.slider.title3', defaultMessage: 'Waste management and sustainability' }),
+      description: intl.formatMessage({
+        id: 'home.slider.description3',
+        defaultMessage: 'We create tools for environmental management and sustainability for your company.',
+      }),
     },
   ];
 
   const galleryImages = [
     {
       url: '/assets/images/keyboard2.jpg',
-      text: 'Accede al formulario para empezar a trabajar juntos',
+      text: intl.formatMessage({
+        id: 'home.gallery.text1',
+        defaultMessage: 'Access the form to start working together',
+      }),
     },
     {
       url: '/assets/images/namibia-5087365_1280.jpg',
-      text: 'Informate de tus requisitos para ser sostenible',
+      text: intl.formatMessage({
+        id: 'home.gallery.text2',
+        defaultMessage: 'Learn about your requirements to be sustainable',
+      }),
     },
   ];
 
-  const cardImages = [
-    '/assets/images/hearts-9388196_1280.jpg',
-    '/assets/images/penguin-9475470_1280.jpg',
-    '/assets/images/walk-9479264_1280.jpg',
-  ];
-
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
-    setUsername(storedUsername);
-
-    const timer = setTimeout(() => setShowAlert(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (isAuthenticated) {
+      setShowAlert(true); // Show alert after login
+      const timer = setTimeout(() => setShowAlert(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isAuthenticated]); // Trigger effect when authentication state changes
 
   return (
     <Layout>
@@ -58,7 +71,10 @@ const Home: React.FC = () => {
         {/* Welcome Alert */}
         {showAlert && (
           <Alert
-            message={`Welcome, ${username || 'User'}! 🎉`}
+            message={intl.formatMessage(
+              { id: 'home.welcomeMessage', defaultMessage: 'Welcome back, {username}! 🎉' },
+              { username: localStorage.getItem('username') || intl.formatMessage({ id: 'home.defaultUser', defaultMessage: 'User' }) }
+            )}
             type="success"
             showIcon
             className="welcome-alert"
@@ -99,7 +115,9 @@ const Home: React.FC = () => {
             >
               <div className="gallery-item-content">
                 <p>{image.text}</p>
-                <Button type="primary">Contactanos</Button>
+                <Button type="primary">
+                  {intl.formatMessage({ id: 'home.gallery.button', defaultMessage: 'Contact us' })}
+                </Button>
               </div>
             </div>
           ))}
@@ -107,24 +125,6 @@ const Home: React.FC = () => {
 
         {/* Divider */}
         <div className="divider" />
-
-        {/* Row of 3 Cards */}
-        <div className="card-row">
-          {cardImages.map((image, index) => (
-            <Card
-              key={index}
-              title={`Card ${index + 1}`}
-              className="card"
-              cover={<img alt={`Card ${index + 1}`} src={image} />}
-              style={{
-                border: 'none',
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              }}
-            >
-              <p>Card content goes here.</p>
-            </Card>
-          ))}
-        </div>
         <FloatingInput />
       </Content>
     </Layout>

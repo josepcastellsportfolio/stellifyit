@@ -1,7 +1,19 @@
 {
-    "header.home": "Home",
-    "header.about": "Who we are",
-    "header.whatWeDo": "What we do",
-    "header.contact": "Contact us",
-    "header.profile": "Profile"
-  }
+  "header.home": "Home",
+  "header.about": "Who we are",
+  "header.whatWeDo": "What we do",
+  "header.contact": "Contact us",
+  "header.profile": "Profile",
+  "floatingInput.placeholder": "Ask Stella any question",
+  "home.welcomeMessage": "Welcome, {username}! 🎉",
+  "home.defaultUser": "User",
+  "home.slider.title1": "Digital solutions for your business",
+  "home.slider.description1": "Improve your business performance through online management.",
+  "home.slider.title2": "Dedicated teams for your needs",
+  "home.slider.description2": "We create platforms tailored to your business model.",
+  "home.slider.title3": "Waste management and sustainability",
+  "home.slider.description3": "We create tools for environmental management and sustainability for your company.",
+  "home.gallery.text1": "Access the form to start working together",
+  "home.gallery.text2": "Learn about your requirements to be sustainable",
+  "home.gallery.button": "Contact us"
+}

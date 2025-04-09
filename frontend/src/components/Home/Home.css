@@ -82,3 +82,17 @@
   max-width: 400px; /* Optional: Set a max width */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }
+
+@media (max-width: 768px) {
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 400px;
+  }
+
+  .gallery-item {
+    width: 100%;
+ /* Set a fixed height to maintain normal height */
+  }
+}

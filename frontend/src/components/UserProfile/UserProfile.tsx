@@ -1,14 +1,21 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Card, Typography, Layout } from 'antd';
+import './UserProfile.css';
+
+const { Title, Paragraph } = Typography;
+const { Content } = Layout;
 
 const UserProfile: React.FC = () => {
-  const { id } = useParams();
-
+  const username = localStorage.getItem('username') || 'Guest';
   return (
-    <div>
-      <h1>User Profile</h1>
-      <p>User ID: {id}</p>
-    </div>
+    <Layout>
+      <Content className="user-profile-content">
+        <Card className="user-profile-card">
+          <Title level={2}>User Profile</Title>
+          <Paragraph><strong>Username:</strong> {username}</Paragraph>
+        </Card>
+      </Content>
+    </Layout>
   );
 };
 

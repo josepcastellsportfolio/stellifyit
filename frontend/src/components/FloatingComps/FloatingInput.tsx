@@ -4,6 +4,7 @@ import { SendOutlined, DownOutlined, UserOutlined, RobotOutlined, LineOutlined, 
 import { openRouterService } from '../../services/api';
 import './FloatingInput.css';
 import { CheckOutlined } from '@ant-design/icons';
+import { useIntl } from 'react-intl'; // Importa useIntl
 
 const FloatingInput: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
@@ -12,7 +13,8 @@ const FloatingInput: React.FC = () => {
   const [models, setModels] = useState<string[]>([]);
   const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [modelsLoading, setModelsLoading] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(true);
+  const intl = useIntl(); // Inicializa useIntl
 
   const toggleMinimize = () => {
     setIsMinimized((prev) => !prev);
@@ -58,6 +60,26 @@ const FloatingInput: React.FC = () => {
       setIsMinimized(false); // Open the chat container if input is active
     }
   }, [inputValue]);
+
+  useEffect(() => {
+    const chatContainer = document.querySelector('.chat-container');
+    if (chatContainer) {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  }, [response]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Enter' && inputValue.trim() && !loading) {
+        handleSubmit();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [inputValue, loading]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -119,65 +141,82 @@ const FloatingInput: React.FC = () => {
         .trim()
     : null;
 
-  return (
-    <Layout className={`floating-input-container ${isMinimized ? 'minimized' : ''}`}>
-      <Button onClick={toggleMinimize} className="minimize-button">
-        {isMinimized ? <UpOutlined /> : <LineOutlined />}
-      </Button>
-      {!isMinimized && (
-        <div className="chat-container">
-          {response &&
-            response.map((message, index) => (
-              <div
-                key={index}
-                className={`chat-message-container ${message.role === 'user' ? 'user' : 'assistant'}`}
-              >
-                {message.role === 'user' ? (
-                  <>
-                    <Avatar className="chat-avatar" size={14} icon={<UserOutlined />} />
-                    <p className="chat-message user-message">{message.content}</p>
-                  </>
-                ) : (
-                  <>
-                    <p className="chat-message assistant-message">{message.content}</p>
-                    <Avatar className="chat-avatar" size={14} icon={<RobotOutlined />} />
-                  </>
-                )}
-              </div>
-            ))}
-        </div>
-      )}
-      {formattedSelectedModel && (
-        <Tag color="blue" className="selected-model-tag">
-          {formattedSelectedModel}
-        </Tag>
-      )}
-      <div className="input-with-button">
-        <Input
-          placeholder="Pregúntale a Stella cualquier duda sobre nosotros"
-          value={inputValue}
-          onChange={handleInputChange}
-          className="floating-input"
-          suffix={
-            inputValue.trim() ? (
-              <Button
-                type="primary"
-                icon={<SendOutlined />}
-                onClick={handleSubmit}
-                className="floating-input-button"
+  const avatarSize = isMinimized ? 14 : 28; // Adjust avatar size for mobile mode
+
+    return (
+      <Layout
+        className={`floating-input-container ${isMinimized ? 'minimized' : 'maximized'}`}
+      >
+        {isMinimized ? (
+          <Button
+            className="chat-avatar-button"
+            shape="circle"
+            size="large"
+            icon={<RobotOutlined />}
+            onClick={toggleMinimize}
+          />
+        ) : (
+          <>
+            <Button onClick={toggleMinimize} className="minimize-button">
+              <LineOutlined />
+            </Button>
+            <div className="chat-container">
+              {response &&
+                response.map((message, index) => (
+                  <div
+                    key={index}
+                    className={`chat-message-container ${message.role === 'user' ? 'user' : 'assistant'}`}
+                  >
+                    {message.role === 'user' ? (
+                      <>
+                        <Avatar className="chat-avatar" size={avatarSize} icon={<UserOutlined />} />
+                        <p className="chat-message user-message">{message.content}</p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="chat-message assistant-message">{message.content}</p>
+                        <Avatar className="chat-avatar" size={avatarSize} icon={<RobotOutlined />} />
+                      </>
+                    )}
+                  </div>
+                ))}
+            </div>
+            {formattedSelectedModel && (
+              <Tag color="blue" className="selected-model-tag">
+                {formattedSelectedModel}
+              </Tag>
+            )}
+            <div className="input-with-button">
+              <Input
+                placeholder={intl.formatMessage({
+                  id: 'floatingInput.placeholder',
+                  defaultMessage: 'Ask Stella any question',
+                })}
+                value={inputValue}
+                onChange={handleInputChange}
+                className="floating-input"
+                suffix={
+                  inputValue.trim() ? (
+                    <Button
+                      type="primary"
+                      icon={<SendOutlined />}
+                      onClick={handleSubmit}
+                      className="floating-input-button"
+                    />
+                  ) : modelsLoading ? (
+                    <Spin />
+                  ) : (
+                    <Dropdown overlay={modelsMenu} trigger={['click']}>
+                      <Button icon={<DownOutlined />} className="floating-input-button" />
+                    </Dropdown>
+                  )
+                }
               />
-            ) : modelsLoading ? (
-              <Spin />
-            ) : (
-              <Dropdown overlay={modelsMenu} trigger={['click']}>
-                <Button icon={<DownOutlined />} className="floating-input-button" />
-              </Dropdown>
-            )
-          }
-        />
-      </div>
-    </Layout>
-  );
+            </div>
+          </>
+        )}
+      </Layout>
+    );
 };
 
 export default FloatingInput;

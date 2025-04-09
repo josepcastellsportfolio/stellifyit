@@ -90,9 +90,4 @@
     gap: 16px;
     height: 400px;
   }
-
-  .gallery-item {
-    width: 100%;
- /* Set a fixed height to maintain normal height */
-  }
 }
